@@ -36,14 +36,14 @@ deltaFmax=10+round(max(max(abs(workForwards)),max(abs(workBackwards))));
 deltaFmin=-deltaFmax;
 deltaF=linspace(deltaFmin,deltaFmax,(deltaFmax-deltaFmin)/ddeltaF);
 
-% Bayesian inference of deltaF
-posterior=1; % Initialisation
+% Bayesian inference to find deltaF
+posterior=1; % initialisation
 deltaFest=zeros(1,length(workForwards));
 deltaFerr=zeros(1,length(workForwards));
 if length(workForwards)~=length(workBackwards)
     error('The number of forwards protocols must be equal to the number of backwards protocols for this algorithm to work.')
 end
-workForwards=workForwards(randperm(length(workForwards))); % For representation purposes (it does not change the final estimate)
+workForwards=workForwards(randperm(length(workForwards))); % for representation purposes (it does not change the final estimate)
 workBackwards=workBackwards(randperm(length(workBackwards)));
 for x=1:length(workForwards)
     exponentF=beta*(workForwards(x)-deltaF);
