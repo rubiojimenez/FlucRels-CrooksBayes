@@ -1,4 +1,4 @@
-function [deltaFest,deltaFerr,deltaF,posterior] = crooksBayes_method(workForwards,workBackwards,beta)
+function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta)
 %% Crooks-Bayes method for the estimation of free energy differences
 %
 % Created: Jan 2021
@@ -17,7 +17,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooksBayes_method(workForward
 %
 % To use it:
 %
-% [deltaFest,deltaFerr,deltaF,posterior] = crooksBayes_method(workForwards,workBackwards,beta)
+% [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta)
 %
 % Inputs:
 %   - workForwards: work associated with the forward protocol
