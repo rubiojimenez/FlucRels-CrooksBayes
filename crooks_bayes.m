@@ -25,8 +25,8 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %   - beta: bath inverse temperature
 %
 % Outputs:
-%   - deltaFest: free energy difference estimate
-%   - deltaErr: free energy difference estimate error
+%   - deltaFest: free energy difference estimates (for 1 datum, for 2 data, for 3 data, etc)
+%   - deltaErr: free energy difference estimate errors (for 1 datum, for 2 data, for 3 data, etc)
 %   - deltaF: possible values for the free energy difference
 %   - posterior: posterior probability for the free energy difference
 
