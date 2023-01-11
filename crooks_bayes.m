@@ -31,7 +31,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %   - posterior: posterior probability for the free energy difference
 
 %% Parameter space
-ddeltaF=0.001; % change to achieve the desired precision
+ddeltaF=0.01; % change to achieve the desired precision
 deltaFmax=10+round(max(max(abs(workForwards)),max(abs(workBackwards))));
 deltaFmin=-deltaFmax;
 deltaF=linspace(deltaFmin,deltaFmax,(deltaFmax-deltaFmin)/ddeltaF);
