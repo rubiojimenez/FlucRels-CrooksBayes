@@ -1,8 +1,8 @@
 function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta)
-%% Crooks-Bayes method for the estimation of free energy differences
+%% Crooks-Bayes estimation of free energy differences
 %
 % Created: Jan 2021
-% Last update: Dec 2021
+% Last update: Jan 2023
 %
 % Dr Jesús Rubio
 % University of Exeter
@@ -12,8 +12,8 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %
 %       P. Maragakis et al., J Chem Phys 129, 024102 (2008)
 %
-% for the estimation of free energy differences. Namely, it processes forward and backward work 
-% measurements via Bayesian inference, once Crooks relation has been enforced.
+% for the estimation of free energy differences. Namely, it processes forward and backward work
+% measurements using Crooks relation and Bayesian inference.
 %
 % To use it:
 %
@@ -22,21 +22,21 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 % Inputs:
 %   - workForwards: work associated with the forward protocol
 %   - workBackwards: work associated with the backward protocol
-%   - beta: bath inverse temperature
+%   - beta: inverse temperature of the bath
 %
 % Outputs:
-%   - deltaFest: free energy difference estimates (for 1 datum, for 2 data, for 3 data, etc)
-%   - deltaErr: free energy difference estimate errors (for 1 datum, for 2 data, for 3 data, etc)
-%   - deltaF: possible values for the free energy difference
+%   - deltaFest: estimate for the free energy difference
+%   - deltaErr: estimate error
+%   - deltaF: hypothesis range for the free energy difference
 %   - posterior: posterior probability for the free energy difference
 
 %% Parameter space
-ddeltaF=0.001; % change to achieve the precision you require for your problem
+ddeltaF=0.001; % change to achieve the desired precision
 deltaFmax=10+round(max(max(abs(workForwards)),max(abs(workBackwards))));
 deltaFmin=-deltaFmax;
 deltaF=linspace(deltaFmin,deltaFmax,(deltaFmax-deltaFmin)/ddeltaF);
 
-% Bayesian inference to find deltaF
+%% Estimation of deltaF using the Crooks-Bayes method
 posterior=1; % initialisation
 deltaFest=zeros(1,length(workForwards));
 deltaFerr=zeros(1,length(workForwards));
@@ -50,14 +50,14 @@ for x=1:length(workForwards)
     exponentB=beta*(-workBackwards(x)+deltaF);
     temp=logistic(exponentF).*logistic(exponentB);
     temp=temp/trapz(deltaF,temp);
-
+    
     % Posterior probability
     posterior=temp.*posterior;
     posterior=posterior/trapz(deltaF,posterior);
-
+    
     % Estimate (mean of the posterior; optimal under the square error criterion)
     deltaFest(x)=trapz(deltaF,posterior.*deltaF);
-
+    
     % Uncertainty (measurement-dependent mean square error)
     deltaFerr(x)=sqrt(trapz(deltaF,posterior.*deltaF.*deltaF)-deltaFest(x)^2);
 end
