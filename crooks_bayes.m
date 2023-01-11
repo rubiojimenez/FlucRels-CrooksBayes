@@ -1,4 +1,4 @@
-function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta)
+function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta,deltaFmin,deltaFmax)
 %% Crooks-Bayes estimation of free energy differences
 %
 % Created: Jan 2021
@@ -23,6 +23,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %   - workForwards: work associated with the forward protocol
 %   - workBackwards: work associated with the backward protocol
 %   - beta: inverse temperature of the bath
+%   - [deltaFmin, deltaFmax]: hypohtesis range
 %
 % Outputs:
 %   - deltaFest: estimate for the free energy difference
@@ -31,9 +32,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %   - posterior: posterior probability for the free energy difference
 
 %% Parameter space
-ddeltaF=0.01; % change to achieve the desired precision
-deltaFmax=10+round(max(max(abs(workForwards)),max(abs(workBackwards))));
-deltaFmin=-deltaFmax;
+ddeltaF=0.1; % change to achieve the desired precision
 deltaF=linspace(deltaFmin,deltaFmax,(deltaFmax-deltaFmin)/ddeltaF);
 
 %% Estimation of deltaF using the Crooks-Bayes method
