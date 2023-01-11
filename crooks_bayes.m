@@ -17,7 +17,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %
 % To use it:
 %
-% [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta)
+% [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta,deltaFmin,deltaFmax)
 %
 % Inputs:
 %   - workForwards: work associated with the forward protocol
