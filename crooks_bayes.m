@@ -2,7 +2,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %% Crooks-Bayes estimation of free energy differences
 %
 % Created: Jan 2021
-% Last update: Jan 2023
+% Last update: Feb 2023
 %
 % Dr Jesús Rubio
 % University of Exeter
@@ -20,8 +20,8 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 % [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,workBackwards,beta,deltaFmin,deltaFmax)
 %
 % Inputs:
-%   - workForwards: work associated with the forward protocol
-%   - workBackwards: work associated with the backward protocol
+%   - workForwards: work needed to implement the forward protocol
+%   - workBackwards: work needed to implement the backward protocol
 %   - beta: inverse temperature of the bath
 %   - [deltaFmin, deltaFmax]: hypohtesis range
 %
@@ -39,14 +39,14 @@ deltaF=linspace(deltaFmin,deltaFmax,(deltaFmax-deltaFmin)/ddeltaF);
 posterior=1; % initialisation
 deltaFest=zeros(1,length(workForwards));
 deltaFerr=zeros(1,length(workForwards));
+
 if length(workForwards)~=length(workBackwards)
     error('The number of forwards protocols must be equal to the number of backwards protocols for this algorithm to work.')
 end
-workForwards=workForwards(randperm(length(workForwards))); % for representation purposes (it does not change the final estimate)
-workBackwards=workBackwards(randperm(length(workBackwards)));
+
 for x=1:length(workForwards)
     exponentF=beta*(workForwards(x)-deltaF);
-    exponentB=beta*(-workBackwards(x)+deltaF);
+    exponentB=beta*(workBackwards(x)+deltaF);
     temp=logistic(exponentF).*logistic(exponentB);
     temp=temp/trapz(deltaF,temp);
     
