@@ -2,11 +2,11 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %% Crooks-Bayes estimation of free energy differences
 %
 % Created: Jan 2021
-% Last update: Feb 2023
+% Last update: Oct 2023
 %
 % Dr Jesús Rubio
-% University of Exeter
-% J.Rubio-Jimenez@exeter.ac.uk
+% University of Surrey
+% j.rubiojimenez@surrey.ac.uk
 %
 % This algorithm implements the method in
 %
