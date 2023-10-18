@@ -13,7 +13,7 @@ function [deltaFest,deltaFerr,deltaF,posterior] = crooks_bayes(workForwards,work
 %       P. Maragakis et al., J Chem Phys 129, 024102 (2008)
 %
 % for the estimation of free energy differences. Namely, it processes forward and backward work
-% measurements using Crooks relation and Bayesian inference.
+% measurements using the Crooks relation and Bayesian inference.
 %
 % To use it:
 %
