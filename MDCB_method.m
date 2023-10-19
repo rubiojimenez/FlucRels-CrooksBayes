@@ -7,8 +7,7 @@
 % University of Surrey
 % j.rubiojimenez@surrey.ac.uk
 % 
-% This script generates the shifted redox potentials as calculated via the
-% Crooks-Bayes approach reported in: 
+% This script generates the redox potential shifts as calculated via the Crooks-Bayes approach reported in: 
 %
 %   S. Oliveira, J. Rubio, et al., arXiv:2302.13089 (2023)
 %
@@ -59,7 +58,7 @@ work_backwards_ref = data_b_ref(:,5);
 
 delta_g_ref = crooks_bayes(work_forwards_ref, work_backwards_ref, beta, delta_g_min, delta_g_max);
 
-%% Shifted redox potential
+%% Redox potential shift
 [delta_g_est, delta_g_err, delta_g_max, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max);
 E_shift = -(delta_g_est(end) - delta_g_ref(end))*10^6/F;
 round(E_shift(1)) % final result for a given mutant (in mV)
