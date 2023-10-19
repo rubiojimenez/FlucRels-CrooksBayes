@@ -14,7 +14,7 @@ function [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forw
 %
 % To use it:
 %
-%   [delta_g_est,delta_g_err,delta_g,posterior] = crooks_bayes(work_forwards,work_backwards,beta,delta_g_min,delta_g_max)
+%   [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max)
 %
 % Inputs:
 %
