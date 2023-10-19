@@ -26,7 +26,7 @@ function [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forw
 % Output:
 %
 %   - delta_g_est: the free energy difference estimate
-%   - delta_errrr: estimate error
+%   - delta_err: estimate error
 %   - delta_g: hypothesis range for the free energy difference
 %   - posterior: posterior probability over the hypothesis range
 
