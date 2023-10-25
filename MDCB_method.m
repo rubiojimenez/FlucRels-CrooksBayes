@@ -44,18 +44,18 @@ delta_g_min = -396;
 delta_g_max = 531;
 
 %% Simulated data
-data_f = load('T19D_PotentialEner_0_ox_2_red_jun21'); % replace this and the data file below for different mutants
-work_forwards = -data_f(:,5);
+data_f = load('T19D-T77D_PotentialEner_0_ox_2_red_jun21'); % replace this and the data file below for different mutants
+work_forwards = data_f(:,4) - data_f(:,3);
 
-data_b = load('T19D_PotentialEner_0_red_2_ox_jun21');
-work_backwards = -data_b(:,5);
+data_b = load('T19D-T77D_PotentialEner_0_red_2_ox_jun21');
+work_backwards = data_b(:,4) - data_b(:,3);
 
 %% Reference potential
 data_f_ref=load('WT_PotentialEner_0_ox_2_red_jun21'); 
-work_forwards_ref = -data_f_ref(:,5);
+work_forwards_ref = data_f_ref(:,4) - data_f_ref(:,3);
 
 data_b_ref=load('WT_PotentialEner_0_red_2_ox_jun21');
-work_backwards_ref = -data_b_ref(:,5);
+work_backwards_ref = data_b_ref(:,4) - data_b_ref(:,3);
 
 [delta_g_ref, delta_g_ref_err, ~, ~] = crooks_bayes(work_forwards_ref, work_backwards_ref, beta, delta_g_min, delta_g_max);
 
