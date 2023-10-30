@@ -1,4 +1,4 @@
-function [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max)
+function [delta_g_est, delta_g_err, delta_g_range, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max)
 %% Crooks-Bayes estimation of free energy differences
 %
 % Created: Jan 2021
@@ -14,7 +14,7 @@ function [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forw
 %
 % To use it:
 %
-%   [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max)
+%   [delta_g_est,delta_g_err,delta_g,posterior] = crooks_bayes(work_forwards,work_backwards,beta,delta_g_min,delta_g_max)
 %
 % Inputs:
 %
@@ -26,13 +26,13 @@ function [delta_g_est, delta_g_err, delta_g, posterior] = crooks_bayes(work_forw
 % Output:
 %
 %   - delta_g_est: the free energy difference estimate
-%   - delta_err: estimate error
-%   - delta_g: hypothesis range for the free energy difference
+%   - delta_g_err: estimate error
+%   - delta_g_range: hypothesis range for the free energy difference
 %   - posterior: posterior probability over the hypothesis range
 
 %% Parameter space
-d_delta_g=0.1; % change to achieve the desired precision
-delta_g=linspace(delta_g_min,delta_g_max,(delta_g_max-delta_g_min)/d_delta_g);
+d_delta_g=0.01; % change to achieve the desired precision
+delta_g_range=linspace(delta_g_min,delta_g_max,(delta_g_max-delta_g_min)/d_delta_g);
 
 %% Crooks-Bayes estimation of delta_g 
 posterior = 1; % initialisation (flat prior)
@@ -44,19 +44,19 @@ if length(work_forwards) ~= length(work_backwards)
 end
 
 for x = 1:length(work_forwards)
-    exponent_f = beta*(work_forwards(x) - delta_g);
-    exponent_b = beta*(work_backwards(x) + delta_g);
+    exponent_f = beta*(work_forwards(x) - delta_g_range);
+    exponent_b = beta*(work_backwards(x) + delta_g_range);
     temp = logistic(exponent_f).*logistic(exponent_b); % logistic is a custom function
-    temp = temp/trapz(delta_g, temp); % normalised to avoid numerical errors
+    temp = temp/trapz(delta_g_range, temp); % normalised to avoid numerical errors
     
     % Posterior probability
     posterior = temp.*posterior;
-    posterior = posterior/trapz(delta_g, posterior); % normalised at every step to avoid numerical errors 
+    posterior = posterior/trapz(delta_g_range, posterior); % normalised at every step to avoid numerical errors 
     
     % Estimate (posterior mean; optimal under the square error criterion)
-    delta_g_est(x) = trapz(delta_g, posterior.*delta_g);
+    delta_g_est(x) = trapz(delta_g_range, posterior.*delta_g_range);
     
     % Uncertainty (measurement-dependent mean square error)
-    delta_g_err(x) = sqrt(trapz(delta_g, posterior.*delta_g.*delta_g) - delta_g_est(x)^2);
+    delta_g_err(x) = sqrt(trapz(delta_g_range, posterior.*delta_g_range.*delta_g_range) - delta_g_est(x)^2);
 end
 end
