@@ -11,7 +11,7 @@
 %
 %   S. Oliveira, J. Rubio, et al., arXiv:2302.13089 (2023)
 %
-% It uses the following data files produced by Dr Sofia Oliveira (University of Bristol):
+% It uses works data sets simulated by Dr Sofia Oliveira (University of Bristol).
 clear all %#ok<CLALL>
 
 %%  Mutant
@@ -60,8 +60,8 @@ elseif mutant == 3
 
 end
 
-work_backwards = data_b(:,4) - data_b(:,3);
 work_forwards = data_f(:,4) - data_f(:,3);
+work_backwards = data_b(:,4) - data_b(:,3);
 
 %% Reference potential
 data_f_ref=load('WT_PotentialEner_0_ox_2_red_jun21'); 
@@ -71,6 +71,13 @@ work_forwards_ref = data_f_ref(:,4) - data_f_ref(:,3);
 work_backwards_ref = data_b_ref(:,4) - data_b_ref(:,3);
 
 [delta_g_est_ref, delta_g_ref_err, delta_g_ref_range, posterior_ref] = crooks_bayes(work_forwards_ref, work_backwards_ref, beta, delta_g_min, delta_g_max);
+
+%% Reordering independent work data (for easier visualisation)
+work_forwards = work_forwards(randperm(length(work_forwards)));
+work_backwards = work_backwards(randperm(length(work_backwards)));
+
+work_forwards_ref = work_forwards_ref(randperm(length(work_forwards_ref)));
+work_backwards_ref  = work_backwards_ref(randperm(length(work_backwards_ref)));
 
 %% Redox potentials
 [delta_g_est, delta_g_err, delta_g_range, posterior] = crooks_bayes(work_forwards, work_backwards, beta, delta_g_min, delta_g_max);
