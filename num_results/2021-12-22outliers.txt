@@ -1,0 +1,38 @@
+File: T18D_PotentialEner_0_ox_2_red_jun21
+
+Replicate	Time (ns)
+6		285
+
+
+File: M22N_PotentialEner_0_ox_2_red_jun21
+
+Replicate	Time (ns)
+6		438
+6		440
+
+		
+File: M22N_PotentialEner_0_red_2_ox_jun21
+
+Replicate	Time (ns)
+9		395
+9		425
+9		450
+9		480
+
+
+File: T18D-T76D_PotentialEner_0_red_2_ox_jun21
+
+Replicate	Time (ns)
+14		2455346
+
+
+
+
+
+
+
+
+
+
+
+
