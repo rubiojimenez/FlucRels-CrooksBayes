@@ -29,7 +29,7 @@ mutant = 5;
 %% Prior information
 beta = 1/(298*1.38E-23*1E-3*6.02E23); % inverse temperature in mol/kJ
 F = 96485.3329; % Faraday constant in J/(V mol)
-delta_g_min = -396;
+delta_g_min = -396; % in kJ/mol
 delta_g_max = 531;
 
 %% Simulated data
