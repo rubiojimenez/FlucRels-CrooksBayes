@@ -90,7 +90,7 @@ E_abs_ref_err = -delta_g_ref_err*10^6/F;
 
 %% Shifted redox potential
 E_shift = E_abs(end) - E_abs_ref(end);
-E_shift_err = sqrt(E_abs_ref_err(end)^2 + E_abs_ref_err(end)^2);
+E_shift_err = sqrt(E_abs_err(end)^2 + E_abs_ref_err(end)^2);
 
 %% Save results
 format = '-ascii';
