@@ -6,6 +6,5 @@ S. Oliveira, J. Rubio, et al. [*J. Chem. Theory Comput.* **20**, 1, 385–395 (2
 
 This project uses the **ShadedErrorBar** function by Rob Campbell, licensed under the **GNU Lesser General Public License v3.0 (LGPLv3)**. Original repository: [https://github.com/raacampbell/shadedErrorBar](https://github.com/raacampbell/shadedErrorBar)
 
----
 
 This is the original and curated version of the code. A static archival mirror, preserving citation compatibility with the published article, is available at: [https://github.com/jesus-rubiojimenez/QuThermometry-global](https://github.com/jesus-rubiojimenez/QuThermometry-global)
